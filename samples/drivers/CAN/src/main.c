@@ -199,6 +199,10 @@ void main(void)
 
 #ifdef CONFIG_LOOPBACK_MODE
 	can_configure(can_dev, CAN_LOOPBACK_MODE, 250000);
+#else
+	/* For over-the wire setting bitrate to 125000 since
+	   higher rates cause data loss on stm32f072b_disco */
+	can_configure(can_dev, CAN_NORMAL_MODE, 125000);
 #endif
 
 	led_gpio_dev = device_get_binding(CONFIG_GPIO_LED_DEV);
